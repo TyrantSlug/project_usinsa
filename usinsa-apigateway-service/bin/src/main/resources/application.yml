@@ -1,0 +1,194 @@
+server:
+  port: 8000
+  
+spring:
+  application:
+    name: apigateway-service1
+    
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000" # 3000번 포트 받음
+            allowedHeaders: '*' # 넘어오는 header 전체 다 받겠음
+            allow-credentials: true
+            allowedMethods: POST, GET, PUT, DELETE
+    
+    
+      routes:
+      
+      
+      - id: file-service
+        uri: lb://FILE-SERVICE
+        predicates:
+        - Path=/file-service/** # 유저가 브라우저 주소창에 http://localhost:8000/user-service/users를 입력하면  user-service를 보고 id를 확인하고 uri로 넘어간다.
+        - Method= GET, POST # 해당 코드를 아예 적지 않으면 모두 허용이다. 
+      
+      - id: file-service
+        uri: lb://FILE-SERVICE
+        predicates:
+        - Path=/file-service/** # 유저가 브라우저 주소창에 http://localhost:8000/user-service/users를 입력하면  user-service를 보고 id를 확인하고 uri로 넘어간다.
+        - Method= POST, PUT, DELETE # 해당 코드를 아예 적지 않으면 모두 허용이다. 
+        filters:
+        - name: ManagerFilter
+        
+      - id: order-service
+        uri: lb://ORDER-SERVICE
+        predicates:
+        - Path=/order-service/orders/username
+        - Method=GET
+        filters:
+        - name: AllAuthorityFilter
+
+      - id: order-service
+        uri: lb://ORDER-SERVICE
+        predicates:
+        - Path=/order-service/orders
+        - Method=POST, DELETE
+        filters:
+        - name: AllAuthorityFilter
+        
+      - id: order-service
+        uri: lb://ORDER-SERVICE
+        predicates:
+        - Path=/order-service/orders/user/**
+        - Method=GET
+        filters:
+        - name: AllAuthorityFilter
+        
+        
+      - id: item-service # 순서 2번
+        uri: lb://ITEM-SERVICE # 순서 3번
+        predicates:
+        - Path=/item-service/** # 순서 1번 / 유저가 브라우저 주소창에 ~/catalog-service/~를 입력하면 service를 보고 id를 확인하고 uri로 넘어간다.
+        - Method=GET, POST
+      
+      - id: item-service # 순서 2번
+        uri: lb://ITEM-SERVICE # 순서 3번
+        predicates:
+        - Path=/item-service/item/manager/** # 순서 1번 / 유저가 브라우저 주소창에 ~/catalog-service/~를 입력하면 service를 보고 id를 확인하고 uri로 넘어간다.
+        - Method=POST, PUT, DELETE # 해당 코드를 아예 적지 않으면 모두 허용이다.
+        filters:
+        - name: ManagerFilter
+        
+      - id: item-service # 순서 2번
+        uri: lb://ITEM-SERVICE # 순서 3번
+        predicates:
+        - Path=/item-service/item/productid # 순서 1번 / 유저가 브라우저 주소창에 ~/catalog-service/~를 입력하면 service를 보고 id를 확인하고 uri로 넘어간다.
+        - Method=PUT # 해당 코드를 아예 적지 않으면 모두 허용이다.
+        filters:
+        - name: ManagerFilter        
+        
+
+               
+           
+      - id: reply-service
+        uri: lb://REPLY-SERVICE
+        predicates:
+        - Path=/reply-service/**
+        - Method=GET
+ 
+      - id: reply-service
+        uri: lb://REPLY-SERVICE
+        predicates:
+        - Path=/reply-service/user/**
+        - Method=POST, PUT, DELETE  
+        filters:
+        - name: AllAuthorityFilter
+        
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/member/orders/**
+        - Method= GET  
+        filters:
+        - name: AllAuthorityFilter 
+        
+                   
+        
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/checkid
+        - Method= GET    
+     
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/members/user/**
+        - Method= PUT
+        filters:
+        - name: AllAuthorityFilter
+        
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/members/**
+        - Method= GET, DELETE
+        
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/members/username/**
+        - Method= GET     
+        
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/members
+        - Method= POST        
+        
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/login
+        - Method= POST  
+        
+          
+        
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/health_check
+        - Method= GET        
+
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/actuator/**
+        - Method= GET, POST
+        filters:
+        - RemoveRequestHeader=Cookie # 쿠키삭제
+        - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+        
+      - id: member-service
+        uri: lb://MEMBER-SERVICE
+        predicates:
+        - Path=/member-service/**
+        - Method=GET, POST, PUT, DELETE
+#        filters:
+#        - name: AuthorizationFilter
+#          args:
+#            num1: 1
+#            num2: 2                    
+ 
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true # 유레카 서버에 등록
+    fetch-registry: true # 주기적으로 다른 인스턴스의 데이터를 받아와 갱싱
+    service-url:
+      defaultZone: http://localhost:8761/eureka # 유레카 커서의 주소 정보 
+
+#data:      
+#  SECRETE_KEY: aaaaaaaaaaaaaaaa      
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans

@@ -1,0 +1,30 @@
+/* MemberDetail.css */
+
+.member-detail-container {
+    display: flex;
+    justify-content: center;
+    position: relative; /* 부모 요소를 relative로 설정 */
+  
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .member-detail-background::before {
+    content: "";
+    position: absolute; /* 배경 이미지를 삽입할 가상 요소를 absolute로 설정 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/public/mmmm.png');
+    background-size: contain;
+    background-position: center;
+    opacity: 0.2; /* 배경 이미지의 투명도 조정 (0.0부터 1.0 사이의 값) */
+    z-index: -1; /* 배경 이미지를 내용 뒤로 숨기기 위해 z-index를 설정 */ 
+    background-repeat: repeat;
+  }
+  
+  .custom-card {
+    /* Add any custom styles for the card if needed */
+  }
+  

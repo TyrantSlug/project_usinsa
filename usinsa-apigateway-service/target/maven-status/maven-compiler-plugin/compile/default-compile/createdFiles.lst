@@ -1,0 +1,11 @@
+kr\co\tj\apigatewayservice\filter\AuthorizationFilter.class
+kr\co\tj\apigatewayservice\filter\AllAuthorityFilter$Config.class
+kr\co\tj\apigatewayservice\filter\AllAuthorityFilter.class
+kr\co\tj\apigatewayservice\filter\ManagerFilter$Config.class
+kr\co\tj\apigatewayservice\filter\AdminFilter.class
+kr\co\tj\apigatewayservice\filter\UserFilter$Config.class
+kr\co\tj\apigatewayservice\filter\AuthorizationFilter$Config.class
+kr\co\tj\apigatewayservice\filter\UserFilter.class
+kr\co\tj\apigatewayservice\ApigatewayServiceApplication.class
+kr\co\tj\apigatewayservice\filter\ManagerFilter.class
+kr\co\tj\apigatewayservice\filter\AdminFilter$Config.class

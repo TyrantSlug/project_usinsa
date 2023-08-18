@@ -1,0 +1,12 @@
+kr\co\tj\replyservice\dto\ReplyEntity.class
+kr\co\tj\replyservice\dto\ReplyRequest.class
+kr\co\tj\replyservice\dto\ReplyResponse.class
+kr\co\tj\replyservice\service\ReplyService.class
+kr\co\tj\replyservice\ReplyServiceApplication.class
+kr\co\tj\replyservice\controller\ReplyController.class
+kr\co\tj\replyservice\dto\ReplyDTO.class
+kr\co\tj\replyservice\repository\ReplyRepository.class
+kr\co\tj\replyservice\dto\ReplyRequest$ReplyRequestBuilder.class
+kr\co\tj\replyservice\dto\ReplyResponse$ReplyResponseBuilder.class
+kr\co\tj\replyservice\dto\ReplyDTO$ReplyDTOBuilder.class
+kr\co\tj\replyservice\dto\ReplyEntity$ReplyEntityBuilder.class

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>kr.co.tj</groupId>
 	<artifactId>usinsa-order-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>usinsa-order-service</name>
 	<description>usinsa-order-service</description>
 	<properties>
@@ -18,12 +18,6 @@
 		<spring-cloud.version>2020.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-amqp</artifactId>
-</dependency>
 		
 		
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->

@@ -9,24 +9,15 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kr.co.tj</groupId>
-	<artifactId>apigateway-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>apigateway-service</name>
-	<description>apigateway-service</description>
+	<artifactId>usinsa-apigateway-service</artifactId>
+	<version>1.0</version>
+	<name>usinsa-apigateway-service</name>
+	<description>usinsa-apigateway-service</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
-		
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-amqp</artifactId>
-</dependency>
-
-		
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -14,7 +14,7 @@ function MemberReplyList() {
     (pageNum) => {
       fetchFn(
         "GET",
-        `http://localhost:8000/reply-service/replys/username?username=${username}&pageNum=0`,
+        `/api/reply-service/replys/username?username=${username}&pageNum=0`,
         null
       ).then((data) => {
         if (LOGINER == username || ROLE == 2) {

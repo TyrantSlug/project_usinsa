@@ -16,7 +16,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/usinsa_v2?serverTimezone=Asia/Seoul&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/usinsa?serverTimezone=Asia/Seoul&characterEncoding=utf-8
     username: tj705
     password: tj705
 
@@ -30,9 +30,3 @@ eureka:
     fetch-registry: true # 주기적으로 다른 인스턴스의 데이터를 받아와 갱신
     service-url:
       defaultZone: http://localhost:8761/eureka # 유레가 커서의 주소 정보
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh, health, beans, busrefresh

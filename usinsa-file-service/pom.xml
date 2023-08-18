@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>kr.co.tj</groupId>
 	<artifactId>usinsa-file-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>usinsa-file-service</name>
 	<description>usinsa-file-service</description>
 	<properties>

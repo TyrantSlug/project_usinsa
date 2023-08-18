@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kr.co.tj</groupId>
-	<artifactId>member-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>member-service</name>
-	<description>member-service</description>
+	<artifactId>usinsa-member-service</artifactId>
+	<version>1.0</version>
+	<name>usinsa-member-service</name>
+	<description>usinsa-member-service</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.0</spring-cloud.version>

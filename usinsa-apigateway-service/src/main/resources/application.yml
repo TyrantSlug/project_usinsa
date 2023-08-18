@@ -1,24 +1,17 @@
 server:
   port: 8000
-  
+
 spring:
   application:
     name: apigateway-service1
-    
+
   cloud:
     gateway:
-      globalcors:
-        add-to-simple-url-handler-mapping: true
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:3000" # 3000번 포트 받음
-            allowedHeaders: '*' # 넘어오는 header 전체 다 받겠음
-            allow-credentials: true
-            allowedMethods: POST, GET, PUT, DELETE
-    
+
+
     
       routes:
-      
+       
       - id: bookmark-service
         uri: lb://BOOKMARK-SERVICE
         predicates:
@@ -173,11 +166,7 @@ spring:
         predicates:
         - Path=/member-service/**
         - Method=GET, POST, PUT, DELETE
-#        filters:
-#        - name: AuthorizationFilter
-#          args:
-#            num1: 1
-#            num2: 2                    
+                
  
 eureka:
   instance:
@@ -188,9 +177,7 @@ eureka:
     fetch-registry: true # 주기적으로 다른 인스턴스의 데이터를 받아와 갱싱
     service-url:
       defaultZone: http://localhost:8761/eureka # 유레카 커서의 주소 정보 
-
-#data:      
-#  SECRETE_KEY: aaaaaaaaaaaaaaaa      
+    
 
 management:
   endpoints:

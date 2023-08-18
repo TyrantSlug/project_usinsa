@@ -9,21 +9,15 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kr.co.tj</groupId>
-	<artifactId>reply-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>reply-service</name>
-	<description>reply-service</description>
+	<artifactId>usinsa-bookmark-service</artifactId>
+	<version>1.0</version>
+	<name>usinsa-bookmark-service</name>
+	<description>usinsa-bookmark-service</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-amqp</artifactId>
-</dependency>
 		
 		<dependency>
 		    <groupId>org.modelmapper</groupId>

@@ -13,11 +13,7 @@ function ReplyInsert() {
   const [item, setItem] = useState(null);
 
   useEffect(() => {
-    fetchFn(
-      "GET",
-      `http://localhost:8000/item-service/item/id/${id}`,
-      null
-    ).then((data) => {
+    fetchFn("GET", `/api/item-service/item/id/${id}`, null).then((data) => {
       setItem(data);
     });
   }, [id]);

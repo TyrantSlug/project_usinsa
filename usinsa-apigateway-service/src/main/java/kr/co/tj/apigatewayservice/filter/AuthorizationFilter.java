@@ -18,9 +18,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class AuthorizationFilter extends AbstractGatewayFilterFactory<AuthorizationFilter.Config> {
-	
-	//private static final String SECRET_KEY = "aaaaaaaaaaaaaaaa";
-	
+		
 	private Environment env;
 	
 	@Autowired
@@ -36,14 +34,12 @@ public class AuthorizationFilter extends AbstractGatewayFilterFactory<Authorizat
 	
 //	@Data
 	public static class Config{
-//		private Integer num1;
-//		private Integer num2;
+
 	}
 
 	@Override
 	public GatewayFilter apply(Config config) {
 		
-//		System.out.println(config.num1);
 		// TODO Auto-generated method stub
 		return (exchange, chain) ->{
 			ServerHttpRequest request = exchange.getRequest(); // reactive 패키지명 확인
@@ -54,7 +50,6 @@ public class AuthorizationFilter extends AbstractGatewayFilterFactory<Authorizat
 			
 			String bearertoken = request.getHeaders().get(org.springframework.http.HttpHeaders.AUTHORIZATION).get(0);
 			String token = bearertoken.replace("Bearer ", "");
-			//String token = bearertoken.split(" ")[1];
 			
 			if(!isJwtValid(token)) {
 				return onError(exchange, "토큰이 유효하지 않습니다.", HttpStatus.UNAUTHORIZED);

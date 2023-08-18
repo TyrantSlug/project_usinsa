@@ -6,7 +6,6 @@ import ReplyList from "../reply/ReplyList";
 import { Button, Modal } from "react-bootstrap";
 import OrderInsert from "../order/OrderInsert";
 import moment from "moment";
-import Card from "react-bootstrap/Card";
 
 function ItemDetail() {
   const LOGINER = localStorage.getItem("LOGINER");
@@ -25,7 +24,7 @@ function ItemDetail() {
   useEffect(() => {
     bookmarkFetchFn(
       "GET",
-      `http://localhost:8000/bookmark-service/bid/${id}/username/${LOGINER}`,
+      `/api/bookmark-service/bid/${id}/username/${LOGINER}`,
       null
     ).then((data) => {
       if (data.result) {
@@ -45,7 +44,7 @@ function ItemDetail() {
       username: LOGINER,
     };
 
-    const url = `http://localhost:8000/bookmark-service/createBookmark`;
+    const url = `/api/bookmark-service/createBookmark`;
     const options = {
       method: "POST",
       headers: {
@@ -71,7 +70,7 @@ function ItemDetail() {
     const dto = {
       bid: item.id,
     };
-    const url = `http://localhost:8000/bookmark-service/deleteBookmark`;
+    const url = `/api/bookmark-service/deleteBookmark`;
     const options = {
       method: "DELETE",
       headers: {
@@ -103,7 +102,7 @@ function ItemDetail() {
   };
 
   useEffect(() => {
-    const url = `http://localhost:8000/item-service/viewcount/${id}`;
+    const url = `/api/item-service/viewcount/${id}`;
     const options = {
       method: "GET",
       headers: {
@@ -127,11 +126,7 @@ function ItemDetail() {
   }, [id]);
 
   useEffect(() => {
-    fetchFn(
-      "GET",
-      `http://localhost:8000/item-service/item/id/${id}`,
-      null
-    ).then((data) => {
+    fetchFn("GET", `/api/item-service/item/id/${id}`, null).then((data) => {
       setItem(data);
       console.log(data);
     });
@@ -146,7 +141,7 @@ function ItemDetail() {
 
   function filedelete() {
     const token = localStorage.getItem("BTOKEN");
-    const url = "http://localhost:8000/file-service/filedelete";
+    const url = "/api/file-service/fileDelete";
     const options = {
       method: "DELETE",
       headers: {
@@ -177,7 +172,7 @@ function ItemDetail() {
     formData.append("bid", bid);
 
     const token = localStorage.getItem("BTOKEN");
-    const url = "http://localhost:8000/file-service/fileupload";
+    const url = "/api/file-service/fileUpload";
     const options = {
       method: "POST",
       headers: {
@@ -202,40 +197,35 @@ function ItemDetail() {
       });
   }
 
-  useEffect(() => {
-    const url = `http://localhost:8000/file-service/image/${bid}`;
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  const [imageURL, setImageURL] = useState(null);
 
-    fetch(url, options)
-      .then((response) => {
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const response = await fetch(`/api/file-service/image/${bid}`);
         if (response.status === 200) {
-          return response.json();
+          const blob = await response.blob();
+          const objectURL = URL.createObjectURL(blob);
+          setImageURL(objectURL);
+          console.log(imageURL);
         } else {
           throw new Error("Image not found");
         }
-      })
-      .then((data) => {
-        setImage(data.result);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
-        setImage(null);
-      });
-  }, [bid]);
+        setImageURL(null);
+      }
+    };
 
-  const b = image ? image.dbsaveFilename : null;
+    fetchImage();
+  }, [bid]);
 
   function onsubmitHandler(e) {
     e.preventDefault();
 
     fetchFn(
       "GET",
-      `http://localhost:8000/api/item/list/username/search?username=${username}&pageNum=0`,
+      `/api/api/item/list/username/search?username=${username}&pageNum=0`,
       null
     ).then((data) => {
       window.location.href = `/item/list/username/${item.username}`;
@@ -249,11 +239,7 @@ function ItemDetail() {
       const dto = {
         id,
       };
-      fetchFn(
-        "DELETE",
-        "http://localhost:8000/item-service/item/manager",
-        dto
-      ).then(() => {
+      fetchFn("DELETE", "/api/item-service/item/manager", dto).then(() => {
         window.location.href = "/item-service/list";
       });
     }
@@ -360,9 +346,9 @@ function ItemDetail() {
         </h2>
         <div style={{ display: "flex" }}>
           <div style={{ flex: 1 }}>
-            {image !== null ? (
+            {imageURL ? (
               <>
-                <img src={`/img/${b}`} width={500} height={500} />
+                <img src={imageURL} alt="Image" width={500} height={500} />
               </>
             ) : (
               <img src="/img/a.jpg" width={500} height={500} />

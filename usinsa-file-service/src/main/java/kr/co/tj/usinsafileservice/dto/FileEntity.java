@@ -27,12 +27,14 @@ public class FileEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(columnDefinition = "MediumBLOB")// 자료형을 꼭 "MediumBLOB")로 설정. 안 하면 TinyBlob이 되어서 용량이 너무 적어 업로드가 안 됨.
+	private byte[] bytes;
+	
 	private String originalName;
 	private String savedName;
 	private Date uploadDate;
 	private String uploaderId;
-	private String dbsaveFilename;
 	private Long bid;
 	
 }
+

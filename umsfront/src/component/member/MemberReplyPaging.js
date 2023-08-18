@@ -11,7 +11,7 @@ function MemberReplyPaging(props) {
   function onClickHandler(pageNum) {
     fetchFn(
       "GET",
-      `http://localhost:8000/reply-service/replys/username?username=${username}&pageNum=${
+      `/api/reply-service/replys/username?username=${username}&pageNum=${
         pageNum - 1
       }`
     ).then((data) => {
@@ -31,7 +31,7 @@ function MemberReplyPaging(props) {
   function getPageNumInfo() {
     fetchFn(
       "GET",
-      `http://localhost:8000/reply-service/replys/username?username=${username}&pageNum=0`
+      `/api/reply-service/replys/username?username=${username}&pageNum=0`
     ).then((data) => {
       setTotalPages(data.result.totalPages);
     });

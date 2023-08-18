@@ -17,7 +17,6 @@ import reactor.core.publisher.Mono;
 @Component
 public class UserFilter extends AbstractGatewayFilterFactory<UserFilter.Config> {
 	
-	//private static final String SECRET_KEY = "aaaaaaaaaaaaaaaa";
 	
 	private Environment env;
 	
@@ -30,14 +29,12 @@ public class UserFilter extends AbstractGatewayFilterFactory<UserFilter.Config> 
 	
 //	@Data
 	public static class Config{
-//		private Integer num1;
-//		private Integer num2;
+
 	}
 
 	@Override
 	public GatewayFilter apply(Config config) {
-		
-//		System.out.println(config.num1);
+
 		// TODO Auto-generated method stub
 		return (exchange, chain) ->{
 			ServerHttpRequest request = exchange.getRequest(); // reactive 패키지명 확인

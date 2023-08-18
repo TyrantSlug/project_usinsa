@@ -19,7 +19,6 @@ import reactor.core.publisher.Mono;
 @Component
 public class ManagerFilter extends AbstractGatewayFilterFactory<ManagerFilter.Config> {
 	
-	//private static final String SECRET_KEY = "aaaaaaaaaaaaaaaa";
 	
 	private Environment env;
 	
@@ -48,7 +47,6 @@ public class ManagerFilter extends AbstractGatewayFilterFactory<ManagerFilter.Co
 			
 			String bearertoken = request.getHeaders().get(org.springframework.http.HttpHeaders.AUTHORIZATION).get(0);
 			String token = bearertoken.replace("Bearer ", "");
-			//String token = bearertoken.split(" ")[1];
 			
 			if(!haveAuthority(token)) {
 				return onError(exchange, "토큰이 유효하지 않습니다.", HttpStatus.UNAUTHORIZED);

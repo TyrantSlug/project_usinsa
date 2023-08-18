@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { fetchFn } from '../etc/NetworkUtils';
-import { Pagination } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { fetchFn } from "../etc/NetworkUtils";
+import { Pagination } from "react-bootstrap";
 
 function MemberOrderPaging(props) {
   const [pageStart] = useState(1);
@@ -11,11 +11,10 @@ function MemberOrderPaging(props) {
   function onClickHandler(pageNum) {
     fetchFn(
       "GET",
-      `http://localhost:8000/order-service/orders/username?username=${username}&pageNum=${
+      `/api/order-service/orders/username?username=${username}&pageNum=${
         pageNum - 1
       }`
     ).then((data) => {
-       
       props.setFn(data.result.content);
       setCurrentPage(data.result.number);
       setTotalPages(data.result.totalPages);
@@ -32,7 +31,7 @@ function MemberOrderPaging(props) {
   function getPageNumInfo() {
     fetchFn(
       "GET",
-      `http://localhost:8000/order-service/orders/username?username=${username}&pageNum=0`
+      `/api/order-service/orders/username?username=${username}&pageNum=0`
     ).then((data) => {
       setTotalPages(data.result.totalPages);
     });
@@ -68,4 +67,4 @@ function MemberOrderPaging(props) {
   );
 }
 
-export default MemberOrderPaging
+export default MemberOrderPaging;

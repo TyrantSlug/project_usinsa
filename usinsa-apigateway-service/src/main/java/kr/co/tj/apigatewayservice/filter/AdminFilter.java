@@ -19,8 +19,6 @@ import reactor.core.publisher.Mono;
 @Component
 public class AdminFilter extends AbstractGatewayFilterFactory<AdminFilter.Config> {
 	
-	//private static final String SECRET_KEY = "aaaaaaaaaaaaaaaa";
-	
 	private Environment env;
 
 	public AdminFilter(Environment env) {
@@ -32,23 +30,19 @@ public class AdminFilter extends AbstractGatewayFilterFactory<AdminFilter.Config
 	
 //	@Data
 	public static class Config{
-//		private Integer num1;
-//		private Integer num2;
+
 	}
 
 	@Override
 	public GatewayFilter apply(Config config) {
 		
-//		System.out.println(config.num1);
+
 		// TODO Auto-generated method stub
 		return (exchange, chain) ->{
 			ServerHttpRequest request = exchange.getRequest(); // reactive 패키지명 확인
 			
-		
-			
 			String bearertoken = request.getHeaders().get(org.springframework.http.HttpHeaders.AUTHORIZATION).get(0);
 			String token = bearertoken.replace("Bearer ", "");
-			//String token = bearertoken.split(" ")[1];
 			
 			if(!haveAuthority(token)) {
 				return onError(exchange, "권한이 없습니다.", HttpStatus.UNAUTHORIZED);

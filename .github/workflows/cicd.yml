@@ -1,0 +1,94 @@
+name: Java and React CI/CD
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+permissions:
+  contents: read
+
+jobs:
+  build-maven:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        project: [usinsa-config-service, usinsa-discovery-service, usinsa-apigateway-service, usinsa-member-service, usinsa-item-service, usinsa-reply-service, usinsa-file-service, usinsa-order-service, usinsa-bookmark-service]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "temurin"
+
+      - name: Build with Maven
+        working-directory: ${{ matrix.project }}
+        run: mvn clean compile package -DskipTests=true
+
+      - name: docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build 
+        working-directory: ${{ matrix.project }}
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.project }}:1.0 .
+
+      - name: push
+        working-directory: ${{ matrix.project }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.project }}:1.0
+
+  build-react:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
+        working-directory: umsfront
+        run: npm install
+
+      - name: Build React app
+        working-directory: umsfront
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/usinsa-umsfront:1.0 .
+
+      - name: docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: push
+        working-directory: umsfront
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/usinsa-umsfront:1.0
+
+  deploy:
+    needs: [build-maven, build-react]
+    name: deploy
+    runs-on: [self-hosted, label-1]
+    steps:
+      - name: login dockerhub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Start Docker Compose services
+        run: |
+          docker-compose -f usinsa.yml down
+          docker-compose -f usinsa.yml up -d

@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        project: [usinsa-config-service, usinsa-discovery-service, usinsa-apigateway-service]
+        project: [usinsa-config-service, usinsa-discovery-service, usinsa-apigateway-service, usinsa-member-service, usinsa-item-service, usinsa-reply-service, usinsa-file-service, usinsa-order-service, usinsa-bookmark-service]
 
     steps:
       - name: Checkout code

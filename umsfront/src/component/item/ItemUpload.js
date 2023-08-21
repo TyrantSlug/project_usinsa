@@ -11,7 +11,7 @@ function ItemUpload() {
     //     console.log(formData.get(file1));
 
     // *** (x)
-    fetchFn3("POST", "/api/api/item/fileUpload", formData).then((data) => {
+    fetchFn3("POST", "/api/item/fileUpload", formData).then((data) => {
       console.log(data);
       setBytes("data:image/png;base64," + data.bytes);
     });

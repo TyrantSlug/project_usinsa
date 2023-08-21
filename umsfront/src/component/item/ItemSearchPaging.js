@@ -67,33 +67,6 @@ function ItemSearchPaging(props) {
         </Pagination>
       )}
     </div>
-
-    // <div>
-    //     {totalPages !== undefined && (
-    //         <>
-    //             <button onClick={minusPaging} className="btn-paging">
-    //                 [뒤로]
-    //             </button>
-
-    //             {pagingArr.map((pageNum) => (
-    //                 <button
-    //                     className="btn-paging"
-    //                     key={pageNum}
-    //                     onClick={() => {
-    //                         onClickHandler(pageNum);
-    //                     }}
-    //                     disabled={currentPage + 1 === pageNum}
-    //                 >
-    //                     {pageNum}
-    //                 </button>
-    //             ))}
-
-    //             <button onClick={plusPaging} className="btn-paging">
-    //                 [다음]
-    //             </button>
-    //         </>
-    //     )}
-    // </div>
   );
 }
 

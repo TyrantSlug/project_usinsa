@@ -130,20 +130,6 @@ public class ItemController {
       }
    }
 
-//   @GetMapping("/search/{keyword}")
-//   public ResponseEntity<?> search(@PathVariable("keyword") String keyword) {
-//      Map<String, Object> map = new HashMap<>();
-//
-//      try {
-//         List<ItemDTO> list = itemService.search(keyword);
-//         map.put("result", list);
-//         return ResponseEntity.ok().body(map);
-//      } catch (Exception e) {
-//         e.printStackTrace();
-//         map.put("result", "에러");
-//         return ResponseEntity.badRequest().body(map);
-//      }
-//   }
 
    @GetMapping("/list/username/{username}")
    public ResponseEntity<?> itemListOfStaff(@PathVariable("username") String username) {

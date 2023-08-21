@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import ItemComp from "./ItemComp";
 import { fetchFn } from "../etc/NetworkUtils";
 import ItemListPaging from "./ItemListPaging";
-import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 function ItemList() {

@@ -225,7 +225,7 @@ function ItemDetail() {
 
     fetchFn(
       "GET",
-      `/api/api/item/list/username/search?username=${username}&pageNum=0`,
+      `/api/item/list/username/search?username=${username}&pageNum=0`,
       null
     ).then((data) => {
       window.location.href = `/item/list/username/${item.username}`;

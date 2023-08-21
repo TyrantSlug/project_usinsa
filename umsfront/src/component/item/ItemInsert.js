@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { InsertFetchFn } from "../etc/NetworkUtils";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 function ItemInsert() {

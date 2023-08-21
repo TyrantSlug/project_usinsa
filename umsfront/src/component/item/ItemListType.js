@@ -24,7 +24,6 @@ function ItemTypeList() {
       "GET",
       `/api/item-service/itemtype/itemtype?itemType=${itemType}&pageNum=0`
     ).then((data) => {
-      // console.log(data);
       setPageList(data.result.content);
     });
   }, [itemType]);

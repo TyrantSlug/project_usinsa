@@ -49,7 +49,7 @@ function MemberUpdateName() {
       weight,
     };
 
-    UpdateFetchFn2("member-service/members/user/username", dto);
+    UpdateFetchFn2("/api/member-service/members/user/username", dto);
   }
 
   function onInputHandler(e) {

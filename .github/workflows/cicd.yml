@@ -90,5 +90,5 @@ jobs:
 
       - name: Start Docker Compose services
         run: |
-          docker-compose -f usinsa.yml down
-          docker-compose -f usinsa.yml up -d
+          docker-compose -f ~/actions-runner/usinsa.yml down
+          docker-compose -f ~/actions-runner/usinsa.yml up -d

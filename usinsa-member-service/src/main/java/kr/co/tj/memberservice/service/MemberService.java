@@ -98,6 +98,7 @@ public class MemberService {
 //		return memberEntity;
 //	}
 	
+	@Transactional
 	public MemberDTO updateMember(MemberDTO dto) {
 		
 		MemberEntity entity = memberRepository.findByUsername(dto.getUsername());
@@ -127,11 +128,16 @@ public class MemberService {
 		return dto;
 	}
 
+	@Transactional
 	public void deleteMember(MemberResponse memberResponse) {
 		MemberEntity memberEntity = memberRepository.findByUsername(memberResponse.getUsername());
 		
 		if(memberEntity == null) {
 			throw new RuntimeException("삭제 실패");
+		}
+		
+		if(!passwordEncoder.matches(memberResponse.getPassword(), memberEntity.getPassword())) {
+			throw new RuntimeException("비밀번호가 다름");
 		}
 		
 		memberRepository.delete(memberEntity);

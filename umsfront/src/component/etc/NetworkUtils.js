@@ -72,7 +72,7 @@ export function UpdateFetchFn2(servicename, dto) {
     } else if (servicename === "reply-service") {
       servicename = "item-service";
       window.location.href = `/${servicename}/detail/${data.bid}`;
-    } else if (servicename === "member-service/members/user/username") {
+    } else if (servicename === "/member-service/members/user/username") {
       window.location.href = `/member-service/detail/${data.username}`;
     } else if (servicename === "member-service/password") {
       if (data.username === undefined) {

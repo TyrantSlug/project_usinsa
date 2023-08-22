@@ -17,7 +17,8 @@ function ReplyList() {
         null
       ).then((data) => {
         // console.log(data);
-        setPageList(data.result.content);
+        // setPageList(data.result.content);
+        setPageList(data.result);
       });
     },
     [bid]

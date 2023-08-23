@@ -22,7 +22,7 @@ function ItemListOfStaff() {
   useEffect(() => {
     fetchFn(
       "GET",
-      `http://localhost:8000/item-service/list/username/${username}?pageNum=0`,
+      `api/item-service/list/username/${username}?pageNum=0`,
       null
     ).then((data) => {
       setPageList(data.result.content);

@@ -111,7 +111,7 @@ function ItemListOfStaff() {
                 </div>
               ))}
           </div>
-          <ItemSearchPaging setFn={setPageList} />
+          <ItemSearchPaging username={username} setFn={setPageList} />
         </div>
       </div>
     </div>

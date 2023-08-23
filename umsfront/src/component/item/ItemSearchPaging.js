@@ -13,7 +13,7 @@ function ItemSearchPaging(props) {
   function onClickHandler(pageNum) {
     fetchFn(
       "GET",
-      `api/item-service/list/username/${username}?pageNum=${pageNum - 1}`
+      `/api/item-service/list/username/${username}?pageNum=${pageNum - 1}`
     ).then((data) => {
       props.setFn(data.result.content);
       setCurrentPage(data.result.number);
@@ -30,11 +30,12 @@ function ItemSearchPaging(props) {
 
   // *** 아직 페이징 작업 안했음.(list)
   function getPageNumInfo() {
-    fetchFn("GET", `api/item-service/list/username/${username}?pageNum=0`).then(
-      (data) => {
-        setTotalPages(data.result.totalPages);
-      }
-    );
+    fetchFn(
+      "GET",
+      `/api/item-service/list/username/${username}?pageNum=0`
+    ).then((data) => {
+      setTotalPages(data.result.totalPages);
+    });
   }
   useEffect(getPageNumInfo, [username]);
 

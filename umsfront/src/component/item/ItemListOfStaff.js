@@ -20,11 +20,12 @@ function ItemListOfStaff() {
   // }, [username]);
 
   useEffect(() => {
-    fetchFn("GET", `api/item-service/list/username/${username}?pageNum=0`).then(
-      (data) => {
-        setPageList(data.result.content);
-      }
-    );
+    fetchFn(
+      "GET",
+      `/api/item-service/list/username/${username}?pageNum=0`
+    ).then((data) => {
+      setPageList(data.result.content);
+    });
   }, [username]);
 
   return (

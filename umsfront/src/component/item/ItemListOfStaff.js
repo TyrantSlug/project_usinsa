@@ -9,10 +9,20 @@ function ItemListOfStaff() {
   const [pageList, setPageList] = useState([]);
   const username = useParams().username;
 
+  // useEffect(() => {
+  //   fetchFn(
+  //     "GET",
+  //     `/api/item-service/list/username/search?username=${username}&pageNum=0`,
+  //     null
+  //   ).then((data) => {
+  //     setPageList(data.result.content);
+  //   });
+  // }, [username]);
+
   useEffect(() => {
     fetchFn(
       "GET",
-      `/api/item-service/list/username/search?username=${username}&pageNum=0`,
+      `http://localhost:8000/item-service/list/username/${username}?pageNum=0`,
       null
     ).then((data) => {
       setPageList(data.result.content);

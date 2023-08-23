@@ -102,6 +102,20 @@ public class ItemService {
        
        return pageDTO;
    }
+   
+
+   public Page<ItemDTO> itemListByStaff(String username, int pageNum) {
+	
+	   List<Sort.Order> sortList = new ArrayList<>();
+       sortList.add(Sort.Order.desc("id"));
+       
+       Pageable pageable = PageRequest.of(pageNum, 20, Sort.by(sortList));
+       Page<ItemEntity> pageItem = itemRepository.findByUsername(username, pageable);
+       Page<ItemDTO> pageDTO = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
+	   
+	   return pageDTO;
+   }
+
 
 //   public List<ItemDTO> search(String keyword) {
 //      List<ItemEntity> list_entity = itemRepository.findByitemNameContaining(keyword);

@@ -152,8 +152,6 @@ public class MemberController {
 		MemberDTO dto= MemberDTO.toMemberDTO(memberRequest);
 		
 		dto = memberService.updateMember(dto);
-//		map.put("result", dto);
-//		return ResponseEntity.ok().body(map);
 		
 		MemberResponse memberResponse = dto.toMemberResponse();
 		

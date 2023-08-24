@@ -32,19 +32,23 @@ function ItemTypeList() {
   }
 
   function onClickHandler2() {
-    window.location.href = "/item-service/list/itemType/상의";
+    const selectedItemType = "상의";
+    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
   }
 
   function onClickHandler3() {
-    window.location.href = "/item-service/list/itemType/하의";
+    const selectedItemType = "하의";
+    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
   }
 
   function onClickHandler4() {
-    window.location.href = "/item-service/list/itemType/모자";
+    const selectedItemType = "모자";
+    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
   }
 
   function onClickHandler5() {
-    window.location.href = "/item-service/list/itemType/가방";
+    const selectedItemType = "가방";
+    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
   }
 
   return (

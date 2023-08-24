@@ -25,7 +25,7 @@ import kr.co.tj.usinsaorderservice.service.OrderService;
 
 
 @RestController
-@RequestMapping("order-service")
+@RequestMapping("/order-service")
 public class OrderController {
    
    @Autowired

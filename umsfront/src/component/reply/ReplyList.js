@@ -11,11 +11,13 @@ function ReplyList() {
   // ***listByBid
   useEffect(
     (pageNum) => {
-      fetchFn("GET", `/api/reply-service/replys/${bid}?pageNum=0`, null).then(
-        (data) => {
-          setPageList(data.result);
-        }
-      );
+      fetchFn(
+        "GET",
+        `/api/reply-service/replys/bid/${bid}?pageNum=0`,
+        null
+      ).then((data) => {
+        setPageList(data.result);
+      });
     },
     [bid]
   );

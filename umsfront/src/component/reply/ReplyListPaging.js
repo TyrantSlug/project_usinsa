@@ -12,7 +12,7 @@ function ReplyListPaging(props) {
   function onClickHandler(pageNum) {
     fetchFn(
       "GET",
-      `/api/reply-service/replys/${bid}?pageNum=${pageNum - 1}`
+      `/api/reply-service/replys/bid/${bid}?pageNum=${pageNum - 1}`
     ).then((data) => {
       props.setFn(data.result.content);
       setCurrentPage(data.result.number);
@@ -29,7 +29,7 @@ function ReplyListPaging(props) {
 
   // 페이징 작업 안했음.
   function getPageNumInfo() {
-    fetchFn("GET", `/api/reply-service/replys/${bid}?pageNum=0`).then(
+    fetchFn("GET", `/api/reply-service/replys/bid/${bid}?pageNum=0`).then(
       (data) => {
         setTotalPages(data.result.totalPages);
       }

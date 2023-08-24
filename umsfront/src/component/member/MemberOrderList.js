@@ -10,23 +10,20 @@ function MemberOrderList() {
   const LOGINER = localStorage.getItem("LOGINER");
   const [pageList, setPageList] = useState([]);
 
-  useEffect(
-    (pageNum) => {
-      fetchFn(
-        "GET",
-        `/api/order-service/orders/${username}?pageNum=0`,
-        null
-      ).then((data) => {
-        if (LOGINER == username || ROLE == 2) {
-          setPageList(data.result.content);
-        } else {
-          alert("권한없음");
-          window.location.href = `/`;
-        }
-      });
-    },
-    [username]
-  );
+  useEffect(() => {
+    fetchFn(
+      "GET",
+      `/api/order-service/orders/${username}?pageNum=0`,
+      null
+    ).then((data) => {
+      if (LOGINER == username || ROLE == 2) {
+        setPageList(data.result.content);
+      } else {
+        alert("권한없음");
+        window.location.href = `/`;
+      }
+    });
+  }, [username]);
 
   return (
     <div

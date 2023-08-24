@@ -27,7 +27,7 @@ function MemberDetail() {
   }, [username, LOGINER, ROLE]);
 
   function onClickHandler1() {
-    window.location.href = `/member-service/orderList/${LOGINER}`;
+    window.location.href = `/member-service/orderList/${username}`;
   }
 
   function onClickHandler2() {

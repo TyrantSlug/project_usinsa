@@ -30,7 +30,6 @@ function ReplyList() {
         pageList.map((reply) => {
           return <ReplyComp key={reply.id} reply={reply} />;
         })}
-      <ReplyListPaging bid={bid} setFn={setPageList} />
     </div>
   );
 }

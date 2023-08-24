@@ -40,15 +40,11 @@ public class ReplyController {
 			@RequestParam("pageNum") int pageNum) {
 		Map<String, Object> map = new HashMap<>();
 
-		try {
+		
 			Page<ReplyDTO> page = replyService.findByUsername(username, pageNum);
 			map.put("result", page);
 			return ResponseEntity.ok().body(map);
-		} catch (Exception e) {
-			e.printStackTrace();
-			map.put("result", "해당 유저의 댓글 리스트를 가져오지 못했습니다.");
-			return ResponseEntity.badRequest().body(map);
-		}
+		
 
 	}
 
@@ -56,15 +52,11 @@ public class ReplyController {
 	public ResponseEntity<?> findByBid(@PathVariable("bid") Long bid, @RequestParam("pageNum") int pageNum) {
 		Map<String, Object> map = new HashMap<>();
 
-		try {
+		
 			Page<ReplyDTO> page = replyService.findByBid(bid, pageNum);
 			map.put("result", page);
 			return ResponseEntity.ok().body(map);
-		} catch (Exception e) {
-			e.printStackTrace();
-			map.put("result", "해당 유저의 댓글 리스트를 가져오지 못했습니다.");
-			return ResponseEntity.badRequest().body(map);
-		}
+	
 
 	}
 

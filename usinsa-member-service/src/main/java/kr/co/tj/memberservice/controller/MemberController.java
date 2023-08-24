@@ -34,8 +34,8 @@ public class MemberController {
 	@Autowired
 	private Environment env;
  // //
-	@GetMapping("/checkid")
-	public ResponseEntity<?> checkId(String username) {
+	@GetMapping("/checkid/{username}")
+	public ResponseEntity<?> checkId(@PathVariable("username") String username) {
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("result", memberService.checkByUsername(username));

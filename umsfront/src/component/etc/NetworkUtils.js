@@ -151,7 +151,7 @@ export function DeleteFetchFn2(servicename, dto, is) {
 
 export function idCheckFetFn(username) {
   // *** checkid (x)
-  const url = `/api/member-service/checkid?username=${username}`;
+  const url = `/api/member-service/checkid/${username}`;
 
   let options = {
     method: "GET",

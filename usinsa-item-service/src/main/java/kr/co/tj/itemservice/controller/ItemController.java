@@ -75,7 +75,6 @@ public class ItemController {
    public ResponseEntity<?> updateStockByProductId(@RequestBody OrderResponse orderResponse) {
 
       ItemDTO itemDTO = itemService.findById(orderResponse.getProductId());
-      // ItemEntity itemEntity = itemService.findById(orderResponse.getProductId());
       ItemEntity itemEntity = ItemDTO.toItemEntity(itemDTO);
 
       if (itemEntity == null) {
@@ -104,17 +103,7 @@ public class ItemController {
       }
 
    }
-   
-
-//   @GetMapping("/list/username/search")
-//   public ResponseEntity<?> list(@RequestParam("username") String username, @RequestParam("pageNum") int pageNum) {
-//      Map<String, Object> map = new HashMap<>();
-//      Page<ItemDTO> page = itemService.findAll(username, pageNum);
-//      map.put("result", page);
-//
-//      return ResponseEntity.ok().body(map);
-//   }
-   
+    
    @GetMapping("/search/{keyword}")
    public ResponseEntity<?> search(@PathVariable("keyword") String keyword, @RequestParam("pageNum") int pageNum) {
       Map<String, Object> map = new HashMap<>();
@@ -140,25 +129,26 @@ public class ItemController {
          return ResponseEntity.ok().body(map);
       } catch (Exception e) {
          e.printStackTrace();
-         map.put("result", "해당 스태프의 리스트를 가져오지 못했습니다.");
+         map.put("result", "해당 스태프의 아이템 리스트를 가져오지 못했습니다.");
+         return ResponseEntity.badRequest().body(map);
+      }
+   }
+   
+   @GetMapping("/itemtype/{itemtype}")
+   public ResponseEntity<?> listByItemType(@PathVariable("itemType") String itemType, @RequestParam("pageNum") int pageNum) {
+      Map<String, Object> map = new HashMap<>();
+
+      try {
+         Page<ItemDTO> page = itemService.findByItemType(itemType, pageNum);
+         map.put("result", page);
+         return ResponseEntity.ok().body(map);
+      } catch (Exception e) {
+         e.printStackTrace();
+         map.put("result", "해당 종류의 아이템 리스트를 가져오지 못했습니다.");
          return ResponseEntity.badRequest().body(map);
       }
    }
 
-//   @GetMapping("/list/username/{username}")
-//   public ResponseEntity<?> itemListOfStaff(@PathVariable("username") String username) {
-//      Map<String, Object> map = new HashMap<>();
-//
-//      try {
-//         List<ItemDTO> list = itemService.itemListOfStaff(username);
-//         map.put("result", list);
-//         return ResponseEntity.ok().body(map);
-//      } catch (Exception e) {
-//         e.printStackTrace();
-//         map.put("result", "해당 스태프의 리스트를 가져오지 못했습니다.");
-//         return ResponseEntity.badRequest().body(map);
-//      }
-//   }
 
    @GetMapping("/items/list") // itemList 불러오기
    public ResponseEntity<?> list(int pageNum) {
@@ -170,17 +160,6 @@ public class ItemController {
 
       return ResponseEntity.ok().body(map);
    }
-
-   @GetMapping("/itemtype/itemtype") // ItemTypeList 불러오기
-   public ResponseEntity<?> listByItemType(@RequestParam String itemType, @RequestParam int pageNum) {
-      Map<String, Object> map = new HashMap<>();
-
-      Page<ItemDTO> page = itemService.findByItemType(itemType, pageNum);
-      map.put("result", page);
-
-      return ResponseEntity.ok().body(map);
-   }
-
 
 
    @GetMapping("/item/id/{id}/replys")

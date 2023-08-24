@@ -23,285 +23,246 @@ import kr.co.tj.itemservice.repository.ItemRepository;
 @Service
 public class ItemService {
 
-   @Autowired
-   private ItemRepository itemRepository;
-
-   @Autowired
-   private ReplyFeign replyFeign;
-   
-   public ItemDTO incrementViewCount(long id) {
-	   Optional<ItemEntity> optional = itemRepository.findById(id);
-	   if (!optional.isPresent()) {
-	         throw new RuntimeException("Item not found");
-	      }
-
-	      ItemEntity itemEntity = optional.get();
-
-       if (itemEntity != null) {
-    	   ItemDTO itemDTO = new ItemDTO();
-//           Long currentViewCount = itemEntity.getViewCount();
-//           itemEntity.setViewCount(currentViewCount + 1);
-           if (itemEntity.getViewCount() == null || itemEntity.getViewCount() == 0L) {
-               itemEntity.setViewCount(1L);
-           } else {
-               Long currentViewCount = itemEntity.getViewCount();
-               itemEntity.setViewCount(currentViewCount + 1);
-           }
-           itemRepository.save(itemEntity);
-           itemDTO = ItemDTO.toItemDTO(itemEntity);
-           return itemDTO;
-       }else {
-    	   return null;
-       }
-   }
-   
-   @Transactional
-   public String updateEaByProductId2(ItemEntity itemEntity) {
-
-      try {
-         itemRepository.save(itemEntity);
-         return "ok";
-      } catch (Exception e) {
-         e.printStackTrace();
-         return "fail";
-      }
-   }
-   
-   @Transactional
-   public String updateEaByProductId(ItemEntity itemEntity) {
-
-      try {
-         itemRepository.save(itemEntity);
-         return "ok";
-      } catch (Exception e) {
-         e.printStackTrace();
-         return "fail";
-      }
-   }
-   
-   public Page<ItemDTO> findAll(String username, int pageNum) {
-
-      List<Sort.Order> sortList = new ArrayList<>();
-      sortList.add(Sort.Order.desc("id"));
-
-      Pageable pageable = PageRequest.of(pageNum, 20, Sort.by(sortList));
-      Page<ItemEntity> pageItem = itemRepository.findByUsername(username, pageable);
-      new ItemDTO();
-      Page<ItemDTO> pageDto = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
-
-      return pageDto;
-   }
-   
-   public Page<ItemDTO> search(String keyword, int pageNum) {
-       List<Sort.Order> sortList = new ArrayList<>();
-       sortList.add(Sort.Order.desc("id"));
-       
-       Pageable pageable = PageRequest.of(pageNum, 20, Sort.by(sortList));
-       Page<ItemEntity> pageItem = itemRepository.findByitemNameContaining(keyword, pageable);
-       Page<ItemDTO> pageDTO = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
-       
-       return pageDTO;
-   }
-   
-
-   public Page<ItemDTO> itemListByStaff(String username, int pageNum) {
-	
-	   List<Sort.Order> sortList = new ArrayList<>();
-       sortList.add(Sort.Order.desc("id"));
-       
-       Pageable pageable = PageRequest.of(pageNum, 20, Sort.by(sortList));
-       Page<ItemEntity> pageItem = itemRepository.findByUsername(username, pageable);
-       Page<ItemDTO> pageDTO = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
-	   
-	   return pageDTO;
-   }
-
-
-//   public List<ItemDTO> search(String keyword) {
-//      List<ItemEntity> list_entity = itemRepository.findByitemNameContaining(keyword);
-//
-//      List<ItemDTO> list_e = new ArrayList<>();
-//
-//      for (ItemEntity e : list_entity) {
-//         list_e.add(ItemDTO.toItemDTO(e));
-//      }
-//      return list_e;
-//   }
+	@Autowired
+	private ItemRepository itemRepository;
+
+	@Autowired
+	private ReplyFeign replyFeign;
+
+	public ItemDTO incrementViewCount(long id) {
+		Optional<ItemEntity> optional = itemRepository.findById(id);
+		if (!optional.isPresent()) {
+			throw new RuntimeException("Item not found");
+		}
+
+		ItemEntity itemEntity = optional.get();
+
+		if (itemEntity != null) {
+			ItemDTO itemDTO = new ItemDTO();
+			if (itemEntity.getViewCount() == null || itemEntity.getViewCount() == 0L) {
+				itemEntity.setViewCount(1L);
+			} else {
+				Long currentViewCount = itemEntity.getViewCount();
+				itemEntity.setViewCount(currentViewCount + 1);
+			}
+			itemRepository.save(itemEntity);
+			itemDTO = ItemDTO.toItemDTO(itemEntity);
+			return itemDTO;
+		} else {
+			return null;
+		}
+	}
 
-   public List<ItemDTO> itemListOfStaff(String username) {
+	@Transactional
+	public String updateEaByProductId2(ItemEntity itemEntity) {
 
-      List<ItemEntity> list_entity = itemRepository.findByUsername(username);
+		try {
+			itemRepository.save(itemEntity);
+			return "ok";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+	}
 
-      List<ItemDTO> list_dto = new ArrayList<>();
+	@Transactional
+	public String updateEaByProductId(ItemEntity itemEntity) {
 
-      for (ItemEntity e : list_entity) {
-         list_dto.add(ItemDTO.toItemDTO(e));
-      }
+		try {
+			itemRepository.save(itemEntity);
+			return "ok";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+	}
 
-      return list_dto;
-   }
+	public Page<ItemDTO> search(String keyword, int pageNum) {
+		List<Sort.Order> sortList = new ArrayList<>();
+		sortList.add(Sort.Order.desc("id"));
 
-   public Page<ItemDTO> findAll(int page) {
-      List<Sort.Order> sortList = new ArrayList<>();
-      sortList.add(Sort.Order.desc("id"));
+		Pageable pageable = PageRequest.of(pageNum, 20, Sort.by(sortList));
+		Page<ItemEntity> pageItem = itemRepository.findByitemNameContaining(keyword, pageable);
+		Page<ItemDTO> pageDTO = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
 
-      Pageable pageable = PageRequest.of(page, 20, Sort.by(sortList));
-      Page<ItemEntity> pageItem = itemRepository.findAll(pageable);
-      new ItemDTO();
-      Page<ItemDTO> pageDto = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
+		return pageDTO;
+	}
 
-      return pageDto;
-   }
+	public Page<ItemDTO> itemListByStaff(String username, int pageNum) {
 
-   public Page<ItemDTO> findByItemType(String itemType, int page) {
-      List<Sort.Order> sortList = new ArrayList<>();
-      sortList.add(Sort.Order.desc("id"));
+		List<Sort.Order> sortList = new ArrayList<>();
+		sortList.add(Sort.Order.desc("id"));
 
-      Pageable pageable = PageRequest.of(page, 20, Sort.by(sortList));
-      Page<ItemEntity> pageItem = itemRepository.findByItemType(itemType, pageable);
-      new ItemDTO();
-      Page<ItemDTO> pageDto = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
+		Pageable pageable = PageRequest.of(pageNum, 20, Sort.by(sortList));
+		Page<ItemEntity> pageItem = itemRepository.findByUsername(username, pageable);
+		Page<ItemDTO> pageDTO = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
 
-      return pageDto;
-   }
+		return pageDTO;
+	}
 
+	public Page<ItemDTO> findByItemType(String itemType, int page) {
 
+		List<Sort.Order> sortList = new ArrayList<>();
+		sortList.add(Sort.Order.desc("id"));
 
-   public ItemDTO createItem(ItemDTO itemDTO) {
+		Pageable pageable = PageRequest.of(page, 20, Sort.by(sortList));
+		Page<ItemEntity> pageItem = itemRepository.findByItemType(itemType, pageable);
+		Page<ItemDTO> pageDto = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
 
-      itemDTO = getDate(itemDTO);
-      
-      itemDTO.setViewCount(0L);
+		return pageDto;
+	}
 
-//      itemDTO.setSalePrice(itemDTO.getPrice() - (itemDTO.getPrice() * (itemDTO.getDiscount() / 100)));
-//      itemDTO.setTotalPrice(itemDTO.getSalePrice() * itemDTO.getEa());
+	public List<ItemDTO> itemListOfStaff(String username) {
 
-      ItemEntity itemEntity = itemDTO.toItemEntity();
+		List<ItemEntity> list_entity = itemRepository.findByUsername(username);
 
-      itemEntity = itemRepository.save(itemEntity);
+		List<ItemDTO> list_dto = new ArrayList<>();
 
-      itemDTO = ItemDTO.toItemDTO(itemEntity);
-//      통신작업
-//      ItemResponse itemResponse = itemDTO.toItemResponse();
+		for (ItemEntity e : list_entity) {
+			list_dto.add(ItemDTO.toItemDTO(e));
+		}
 
-      return itemDTO;
-   }
+		return list_dto;
+	}
 
-   private ItemDTO getDate(ItemDTO itemDTO) {
-      Date now = new Date();
+	public Page<ItemDTO> findAll(int page) {
+		List<Sort.Order> sortList = new ArrayList<>();
+		sortList.add(Sort.Order.desc("id"));
 
-      if (itemDTO.getCreateDate() == null) {
-         itemDTO.setCreateDate(now);
-      }
+		Pageable pageable = PageRequest.of(page, 20, Sort.by(sortList));
+		Page<ItemEntity> pageItem = itemRepository.findAll(pageable);
+		new ItemDTO();
+		Page<ItemDTO> pageDto = pageItem.map(itemEntity -> ItemDTO.toItemDTO(itemEntity));
 
-      itemDTO.setUpdateDate(now);
+		return pageDto;
+	}
 
-      return itemDTO;
-   }
 
-   public List<ItemDTO> findAll() {
-      List<ItemDTO> list_dto = new ArrayList<>();
-      List<ItemEntity> list_entity = itemRepository.findAll();
 
-      for (ItemEntity entity : list_entity) {
-         list_dto.add(ItemDTO.toItemDTO(entity));
-      }
+	public ItemDTO createItem(ItemDTO itemDTO) {
 
-      return list_dto;
-   }
+		itemDTO = getDate(itemDTO);
+		itemDTO.setViewCount(0L);
+		ItemEntity itemEntity = itemDTO.toItemEntity();
+		itemEntity = itemRepository.save(itemEntity);
+		itemDTO = ItemDTO.toItemDTO(itemEntity);
 
-   public List<ItemDTO> findByUsername(String username) {
+		return itemDTO;
+	}
 
-      List<ItemDTO> list_dto = new ArrayList<>();
+	private ItemDTO getDate(ItemDTO itemDTO) {
+		Date now = new Date();
 
-      List<ItemEntity> list_entity = itemRepository.findByUsername(username);
+		if (itemDTO.getCreateDate() == null) {
+			itemDTO.setCreateDate(now);
+		}
 
-      for (ItemEntity entity : list_entity) {
-         list_dto.add(ItemDTO.toItemDTO(entity));
-      }
+		itemDTO.setUpdateDate(now);
 
-      return list_dto;
-   }
+		return itemDTO;
+	}
 
-   public ItemDTO findById(Long id) {
-      Optional<ItemEntity> optional = itemRepository.findById(id);
+	public List<ItemDTO> findAll() {
+		List<ItemDTO> list_dto = new ArrayList<>();
+		List<ItemEntity> list_entity = itemRepository.findAll();
 
-      if (!optional.isPresent()) {
-         throw new RuntimeException("잘못된 정보에용1");
-      }
+		for (ItemEntity entity : list_entity) {
+			list_dto.add(ItemDTO.toItemDTO(entity));
+		}
 
-      ItemEntity entity = optional.get();
+		return list_dto;
+	}
 
-      ItemDTO dto = ItemDTO.toItemDTO(entity);
+	public List<ItemDTO> findByUsername(String username) {
 
-      return dto;
-   }
+		List<ItemDTO> list_dto = new ArrayList<>();
 
-   @Transactional
-   public ItemDTO updateItem(ItemDTO itemDTO) {
+		List<ItemEntity> list_entity = itemRepository.findByUsername(username);
 
-      Optional<ItemEntity> optional = itemRepository.findById(itemDTO.getId());
+		for (ItemEntity entity : list_entity) {
+			list_dto.add(ItemDTO.toItemDTO(entity));
+		}
 
-      if (!optional.isPresent()) {
-         throw new RuntimeException("잘못된 정보에용1");
-      }
+		return list_dto;
+	}
 
-      ItemEntity entity = optional.get();
+	public ItemDTO findById(Long id) {
+		Optional<ItemEntity> optional = itemRepository.findById(id);
 
-      if (entity == null) {
-         throw new RuntimeException("잘못된 정보에용");
-      }
+		if (!optional.isPresent()) {
+			throw new RuntimeException("잘못된 정보에용1");
+		}
 
-      entity.setItemName(itemDTO.getItemName());
-      entity.setPrice(itemDTO.getPrice());
-      entity.setDiscount(itemDTO.getDiscount());
-      entity.setEa(itemDTO.getEa());
-      entity.setItemDescribe(itemDTO.getItemDescribe());
-      entity.setUpdateDate(new Date());
-      entity.setItemType(itemDTO.getItemType());
-      entity = itemRepository.save(entity);
-      itemDTO = ItemDTO.toItemDTO(entity);
+		ItemEntity entity = optional.get();
 
-      return itemDTO;
-   }
+		ItemDTO dto = ItemDTO.toItemDTO(entity);
 
-   public List<ItemDTO> findByItemType(String itemType) {
-      List<ItemDTO> list_dto = new ArrayList<>();
-      List<ItemEntity> list_entity = itemRepository.findByItemType(itemType);
+		return dto;
+	}
 
-      for (ItemEntity entity : list_entity) {
-         list_dto.add(ItemDTO.toItemDTO(entity));
-      }
-      return list_dto;
-   }
+	@Transactional
+	public ItemDTO updateItem(ItemDTO itemDTO) {
 
-   @Transactional
-   public void deleteItem(Long id) {
-      itemRepository.deleteById(id);
-   }
+		Optional<ItemEntity> optional = itemRepository.findById(itemDTO.getId());
 
-   public ItemDTO getReplys(Long id) {
+		if (!optional.isPresent()) {
+			throw new RuntimeException("잘못된 정보에용1");
+		}
 
-      Optional<ItemEntity> optional = itemRepository.findById(id);
+		ItemEntity entity = optional.get();
 
-      if (!optional.isPresent()) {
-         throw new RuntimeException("안돼");
-      }
+		if (entity == null) {
+			throw new RuntimeException("잘못된 정보에용");
+		}
 
-      ItemEntity itemEntity = optional.get();
+		entity.setItemName(itemDTO.getItemName());
+		entity.setPrice(itemDTO.getPrice());
+		entity.setDiscount(itemDTO.getDiscount());
+		entity.setEa(itemDTO.getEa());
+		entity.setItemDescribe(itemDTO.getItemDescribe());
+		entity.setUpdateDate(new Date());
+		entity.setItemType(itemDTO.getItemType());
+		entity = itemRepository.save(entity);
+		itemDTO = ItemDTO.toItemDTO(entity);
 
-      // ItemEntity itemEntity = itemRepository.findById(id);
+		return itemDTO;
+	}
 
-      ItemDTO itemDTO = new ItemDTO();
-      itemDTO = ItemDTO.toItemDTO(itemEntity);
+	public List<ItemDTO> findByItemType(String itemType) {
+		List<ItemDTO> list_dto = new ArrayList<>();
+		List<ItemEntity> list_entity = itemRepository.findByItemType(itemType);
 
-      List<ReplyResponse> replyList = replyFeign.getReplysByBid(id);
+		for (ItemEntity entity : list_entity) {
+			list_dto.add(ItemDTO.toItemDTO(entity));
+		}
+		return list_dto;
+	}
 
-      itemDTO.setReplyList(replyList);
+	@Transactional
+	public void deleteItem(Long id) {
+		itemRepository.deleteById(id);
+	}
 
-      return itemDTO;
-   }
+	public ItemDTO getReplys(Long id) {
 
-   
+		Optional<ItemEntity> optional = itemRepository.findById(id);
+
+		if (!optional.isPresent()) {
+			throw new RuntimeException("안돼");
+		}
+
+		ItemEntity itemEntity = optional.get();
+
+		// ItemEntity itemEntity = itemRepository.findById(id);
+
+		ItemDTO itemDTO = new ItemDTO();
+		itemDTO = ItemDTO.toItemDTO(itemEntity);
+
+		List<ReplyResponse> replyList = replyFeign.getReplysByBid(id);
+
+		itemDTO.setReplyList(replyList);
+
+		return itemDTO;
+	}
 
 }

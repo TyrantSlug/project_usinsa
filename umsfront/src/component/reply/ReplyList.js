@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReplyComp from "./ReplyComp";
 import { useParams } from "react-router-dom";
 import { fetchFn } from "../etc/NetworkUtils";
-import ReplyListPaging from "./ReplyPaging";
+import ReplyListPaging from "./ReplyListPaging";
 
 function ReplyList() {
   const bid = useParams().id;
@@ -11,15 +11,11 @@ function ReplyList() {
   // ***listByBid
   useEffect(
     (pageNum) => {
-      fetchFn(
-        "GET",
-        `/api/reply-service/replys/bid?bid=${bid}&pageNum=0`,
-        null
-      ).then((data) => {
-        // console.log(data);
-        // setPageList(data.result.content);
-        setPageList(data.result);
-      });
+      fetchFn("GET", `/api/reply-service/replys/${bid}?pageNum=0`, null).then(
+        (data) => {
+          setPageList(data.result);
+        }
+      );
     },
     [bid]
   );
@@ -32,7 +28,7 @@ function ReplyList() {
         pageList.map((reply) => {
           return <ReplyComp key={reply.id} reply={reply} />;
         })}
-      <ReplyListPaging id={bid} setFn={setPageList} />
+      <ReplyListPaging bid={bid} setFn={setPageList} />
     </div>
   );
 }

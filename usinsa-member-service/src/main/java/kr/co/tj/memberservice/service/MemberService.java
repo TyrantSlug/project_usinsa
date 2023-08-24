@@ -78,26 +78,7 @@ public class MemberService {
 		return memberRepository.findByUsername(username);
 	}
 
-//	@Transactional
-//	public MemberResponse updateMember(MemberResponse memberResponse) {
-//		MemberEntity memberEntity = memberRepository.findByUsername(memberResponse.getUsername());
-//		
-//		if(memberEntity == null) {
-//			throw new RuntimeException("");
-//		}
-//		
-//		memberEntity.setName(memberResponse.getName());
-//		memberEntity.setUpdateDate(new Date());
-//		memberEntity.setAddress(memberResponse.getAddress());
-//		memberEntity.setHeight(memberResponse.getHeight());
-//		memberEntity.setPhoneNumber(memberResponse.getPhoneNumber());
-//		memberEntity.setWeight(memberResponse.getWeight());
-//		memberEntity = memberRepository.save(memberEntity);
-//		dto = MemberDTO.toM(memberEntity);
-//
-//		return memberEntity;
-//	}
-	
+
 	@Transactional
 	public MemberDTO updateMember(MemberDTO dto) {
 		

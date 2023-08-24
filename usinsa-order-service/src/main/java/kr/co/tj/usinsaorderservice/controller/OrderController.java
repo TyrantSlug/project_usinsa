@@ -77,15 +77,33 @@ public class OrderController {
       return ResponseEntity.status(HttpStatus.OK).body(responseList);
    }
    
-   @GetMapping("/orders/username")
-   public ResponseEntity<?> listByUsername(@RequestParam("username") String username, @RequestParam("pageNum") int pageNum) {
+//   @GetMapping("/orders/username")
+//   public ResponseEntity<?> listByUsername(@RequestParam("username") String username, @RequestParam("pageNum") int pageNum) {
+//      Map<String, Object> map = new HashMap<>();
+//      System.out.println(map);
+//      Page<OrderDTO> page = orderService.findByUsername(username, pageNum);
+//      map.put("result", page);
+//      System.out.println(map);
+//      return ResponseEntity.ok().body(map);
+//   } 
+   
+   @GetMapping("/orders/{username}")
+   public ResponseEntity<?> listByUsername(@PathVariable("username") String username, @RequestParam("pageNum") int pageNum) {
       Map<String, Object> map = new HashMap<>();
-      System.out.println(map);
-      Page<OrderDTO> page = orderService.findByUsername(username, pageNum);
-      map.put("result", page);
-      System.out.println(map);
-      return ResponseEntity.ok().body(map);
+
+      
+      try {
+    	  Page<OrderDTO> page = orderService.findByUsername(username, pageNum);
+          map.put("result", page);
+          return ResponseEntity.ok().body(map);
+       } catch (Exception e) {
+          e.printStackTrace();
+          map.put("result", "해당 유저의 주문 목록을 가져오지 못했습니다.");
+          return ResponseEntity.badRequest().body(map);
+       }
+
    } 
+   
 
    
 

@@ -6,13 +6,13 @@ function ReplyListPaging(props) {
   const [pageStart] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const id = props.id;
+  const bid = props.id;
 
-  // 페이징 작업 아직 안헀음.
+  // 페이징 작업 안헀음.
   function onClickHandler(pageNum) {
     fetchFn(
       "GET",
-      `/api/reply-service/replys/bid?bid=${id}&pageNum=${pageNum - 1}`
+      `/api/reply-service/replys/${bid}?pageNum=${pageNum - 1}`
     ).then((data) => {
       props.setFn(data.result.content);
       setCurrentPage(data.result.number);
@@ -27,15 +27,15 @@ function ReplyListPaging(props) {
     }
   }
 
-  // ***페이징 작업 안했음.
+  // 페이징 작업 안했음.
   function getPageNumInfo() {
-    fetchFn("GET", `/api/reply-service/replys/bid?bid=${id}&pageNum=0`).then(
+    fetchFn("GET", `/api/reply-service/replys/${bid}?pageNum=0`).then(
       (data) => {
         setTotalPages(data.result.totalPages);
       }
     );
   }
-  useEffect(getPageNumInfo, [id]);
+  useEffect(getPageNumInfo, [bid]);
 
   return (
     <div className="d-flex justify-content-center">
@@ -63,33 +63,6 @@ function ReplyListPaging(props) {
         </Pagination>
       )}
     </div>
-
-    // <div>
-    //         {totalPages !== undefined && (
-    //             <>
-    //                 <button onClick={minusPaging} className="btn-paging">
-    //                     [뒤로]
-    //                 </button>
-
-    //                 {pagingArr.map((pageNum) => (
-    //                     <button
-    //                         className="btn-paging"
-    //                         key={pageNum}
-    //                         onClick={() => {
-    //                             onClickHandler(pageNum);
-    //                         }}
-    //                         disabled={currentPage + 1 === pageNum}
-    //                     >
-    //                         {pageNum}
-    //                     </button>
-    //                 ))}
-
-    //                 <button onClick={plusPaging} className="btn-paging">
-    //                     [다음]
-    //                 </button>
-    //             </>
-    //         )}
-    //     </div>
   );
 }
 

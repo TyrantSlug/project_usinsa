@@ -11,9 +11,7 @@ function ItemListPaging(props) {
   function onClickHandler(pageNum) {
     fetchFn(
       "GET",
-      `/api/item-service/itemtype/itemtype?itemType=${itemType}&pageNum=${
-        pageNum - 1
-      }`
+      `/api/item-service/itemtype/${itemType}?pageNum=${pageNum - 1}`
     ).then((data) => {
       props.setFn(data.result.content);
       setCurrentPage(data.result.number);
@@ -29,13 +27,12 @@ function ItemListPaging(props) {
   }
 
   function getPageNumInfo() {
-    fetchFn(
-      "GET",
-      `/api/item-service/itemtype/itemtype?itemType=${itemType}&pageNum=0`
-    ).then((data) => {
-      setTotalPages(data.result.totalPages);
-      console.log(data.result);
-    });
+    fetchFn("GET", `/api/item-service/itemtype/${itemType}?pageNum=0`).then(
+      (data) => {
+        setTotalPages(data.result.totalPages);
+        console.log(data.result);
+      }
+    );
   }
   useEffect(getPageNumInfo, [itemType]);
 

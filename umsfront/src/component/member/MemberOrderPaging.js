@@ -11,9 +11,7 @@ function MemberOrderPaging(props) {
   function onClickHandler(pageNum) {
     fetchFn(
       "GET",
-      `/api/order-service/orders/username?username=${username}&pageNum=${
-        pageNum - 1
-      }`
+      `/api/order-service/orders/${username}?pageNum=${pageNum - 1}`
     ).then((data) => {
       props.setFn(data.result.content);
       setCurrentPage(data.result.number);
@@ -29,12 +27,11 @@ function MemberOrderPaging(props) {
   }
 
   function getPageNumInfo() {
-    fetchFn(
-      "GET",
-      `/api/order-service/orders/username?username=${username}&pageNum=0`
-    ).then((data) => {
-      setTotalPages(data.result.totalPages);
-    });
+    fetchFn("GET", `/api/order-service/orders/${username}?pageNum=0`).then(
+      (data) => {
+        setTotalPages(data.result.totalPages);
+      }
+    );
   }
   useEffect(getPageNumInfo, [username]);
 

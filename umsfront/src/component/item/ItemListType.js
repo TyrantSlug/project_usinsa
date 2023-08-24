@@ -20,23 +20,12 @@ function ItemTypeList() {
 
   // ***listByItemType
   useEffect(() => {
-    fetchFn(
-      "GET",
-      `/api/item-service/itemtype/itemtype?itemType=${itemType}&pageNum=0`
-    ).then((data) => {
-      setPageList(data.result.content);
-    });
+    fetchFn("GET", `/api/item-service/itemtype/${itemType}?pageNum=0`).then(
+      (data) => {
+        setPageList(data.result.content);
+      }
+    );
   }, [itemType]);
-
-  function onSubmitHandler(e) {
-    e.preventDefault();
-
-    if (Selected === "item.itemType") {
-      window.location.href = `/item-service/list`;
-    } else {
-      window.location.href = `/item-service/list/itemtype/${Selected}`;
-    }
-  }
 
   function onClickHandler1() {
     window.location.href = "/item-service/list";

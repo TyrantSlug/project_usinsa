@@ -24,26 +24,6 @@ public class ReplyService {
 	@Autowired
 	private ReplyRepository replyRepository;
 
-
-//	댓글 페이지네이션 코드
-//	public Page<ReplyDTO> findByBid(Long bid, int page) {
-//        List<Sort.Order> sortList = new ArrayList<>();
-//        sortList.add(Sort.Order.desc("id"));
-//
-//        Pageable pageable = PageRequest.of(page, 5, Sort.by(sortList));
-//        Page<ReplyEntity> pageItem = replyRepository.findByBid(bid, pageable);
-//        Page<ReplyDTO> pageDto = pageItem.map(replyEntity -> new ReplyDTO(
-//                replyEntity.getId(),
-//                replyEntity.getUsername(),
-//                replyEntity.getContent(),
-//                replyEntity.getCreateDate(),
-//                replyEntity.getUpdateDate(),
-//                replyEntity.getBid()
-//        ));
-//
-//        return pageDto;
-//    }
-//	
 	
 	public Page<ReplyDTO> findByUsername(String username, int page) {
 	       List<Sort.Order> sortList = new ArrayList<>();
@@ -56,21 +36,21 @@ public class ReplyService {
 	          return pageDto;
 	   }
 	
-	 public List<ReplyDTO> findByUsername(String username) {
-	      // TODO Auto-generated method stub
-	      List<ReplyEntity> list_entity = replyRepository.findByUsername(username);
-	      List<ReplyDTO> list_dto = new ArrayList<>();
-	      
-	      if(list_entity.isEmpty()) {
-	         throw new RuntimeException("잘못된 접근입니다. 유저가 존재하지 않습니다.");
-	      }
-	      
-	      for (ReplyEntity e: list_entity) {
-	         list_dto.add(ReplyDTO.toReplyDTO(e));
-	      }
-
-	      return list_dto;
-	   }
+//	 public List<ReplyDTO> findByUsername(String username) {
+//	      // TODO Auto-generated method stub
+//	      List<ReplyEntity> list_entity = replyRepository.findByUsername(username);
+//	      List<ReplyDTO> list_dto = new ArrayList<>();
+//	      
+//	      if(list_entity.isEmpty()) {
+//	         throw new RuntimeException("잘못된 접근입니다. 유저가 존재하지 않습니다.");
+//	      }
+//	      
+//	      for (ReplyEntity e: list_entity) {
+//	         list_dto.add(ReplyDTO.toReplyDTO(e));
+//	      }
+//
+//	      return list_dto;
+//	   }
 
 	// 댓글 입력
 	public ReplyDTO insert(ReplyDTO replyDTO) {
@@ -117,22 +97,22 @@ public class ReplyService {
 
 
 
-	public List<ReplyDTO> findByBId(Long bid) {
-		// TODO Auto-generated method stub
-		List<ReplyEntity> list_entity = replyRepository.findByBid(bid);
-		List<ReplyDTO> list_dto = new ArrayList<>();
-		
-		if(list_entity.isEmpty()) {
-			throw new RuntimeException("잘못된 접근입니다. 게시글이 존재하지 않습니다.");
-		}
-		
-		
-		for (ReplyEntity e: list_entity) {
-			list_dto.add(ReplyDTO.toReplyDTO(e));
-		}
-
-		return list_dto;
-	}
+//	public List<ReplyDTO> findByBId(Long bid) {
+//		// TODO Auto-generated method stub
+//		List<ReplyEntity> list_entity = replyRepository.findByBid(bid);
+//		List<ReplyDTO> list_dto = new ArrayList<>();
+//		
+//		if(list_entity.isEmpty()) {
+//			throw new RuntimeException("잘못된 접근입니다. 게시글이 존재하지 않습니다.");
+//		}
+//		
+//		
+//		for (ReplyEntity e: list_entity) {
+//			list_dto.add(ReplyDTO.toReplyDTO(e));
+//		}
+//
+//		return list_dto;
+//	}
 
 
 

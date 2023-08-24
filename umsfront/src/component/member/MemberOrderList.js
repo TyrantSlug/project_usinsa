@@ -14,7 +14,7 @@ function MemberOrderList() {
     (pageNum) => {
       fetchFn(
         "GET",
-        `/api/order-service/orders/username?username=${username}&pageNum=0`,
+        `/api/order-service/orders/${username}?pageNum=0`,
         null
       ).then((data) => {
         if (LOGINER == username || ROLE == 2) {

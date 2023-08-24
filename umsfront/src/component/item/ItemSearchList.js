@@ -38,9 +38,6 @@ function ItemSearchList() {
     window.location.href = "/item-service/list/itemType/가방";
   }
 
-  function onClickHandler6() {
-    window.location.href = "/item-service/insert";
-  }
 
   return (
     <div>

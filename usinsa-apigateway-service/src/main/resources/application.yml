@@ -7,15 +7,7 @@ spring:
 
   cloud:
     gateway:
-      globalcors:
-        add-to-simple-url-handler-mapping: true
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:3000" # 3000번 포트 받음
-            allowedHeaders: '*' # 넘어오는 header 전체 다 받겠음
-            allow-credentials: true
-            allowedMethods: POST, GET, PUT, DELETE      
-
+     
 
     
       routes:

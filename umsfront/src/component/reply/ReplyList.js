@@ -16,7 +16,7 @@ function ReplyList() {
         `/api/reply-service/replys/bid/${bid}?pageNum=0`,
         null
       ).then((data) => {
-        setPageList(data.result);
+        setPageList(data.result.content);
       });
     },
     [bid]

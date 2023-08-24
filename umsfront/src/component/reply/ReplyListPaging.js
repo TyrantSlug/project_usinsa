@@ -6,7 +6,7 @@ function ReplyListPaging(props) {
   const [pageStart] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const bid = props.id;
+  const bid = props.bid;
 
   // 페이징 작업 안헀음.
   function onClickHandler(pageNum) {

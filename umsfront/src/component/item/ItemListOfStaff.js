@@ -18,7 +18,7 @@ function ItemListOfStaff() {
     });
   }, [username]);
 
-  function onClickHandler1() {
+  function onClickHandler() {
     window.location.href = "/item-service/list";
   }
 

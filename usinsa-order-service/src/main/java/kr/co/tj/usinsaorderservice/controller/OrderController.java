@@ -87,7 +87,7 @@ public class OrderController {
 //      return ResponseEntity.ok().body(map);
 //   } 
    
-   @GetMapping("/orders/{username}")
+   @GetMapping("/orders/list/{username}")
    public ResponseEntity<?> listByUsername(@PathVariable("username") String username, @RequestParam("pageNum") int pageNum) {
       Map<String, Object> map = new HashMap<>();
 

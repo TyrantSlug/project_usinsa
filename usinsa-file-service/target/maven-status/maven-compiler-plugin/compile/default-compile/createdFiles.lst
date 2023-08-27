@@ -1,0 +1,8 @@
+kr\co\tj\usinsafileservice\repository\FileRepository.class
+kr\co\tj\usinsafileservice\UsinsaFileServiceApplication.class
+kr\co\tj\usinsafileservice\service\FileService.class
+kr\co\tj\usinsafileservice\controller\FileController.class
+kr\co\tj\usinsafileservice\dto\FileDTO$FileDTOBuilder.class
+kr\co\tj\usinsafileservice\dto\FileEntity.class
+kr\co\tj\usinsafileservice\dto\FileEntity$FileEntityBuilder.class
+kr\co\tj\usinsafileservice\dto\FileDTO.class

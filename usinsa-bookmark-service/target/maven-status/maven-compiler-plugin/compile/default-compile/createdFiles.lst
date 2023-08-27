@@ -1,0 +1,8 @@
+kr\co\tj\bookmarkservice\service\BookmarkService.class
+kr\co\tj\bookmarkservice\repository\BookmarkRepository.class
+kr\co\tj\bookmarkservice\BookmarkServiceApplication.class
+kr\co\tj\bookmarkservice\dto\BookmarkEntity.class
+kr\co\tj\bookmarkservice\dto\BookmarkEntity$BookmarkEntityBuilder.class
+kr\co\tj\bookmarkservice\controller\BookmarkController.class
+kr\co\tj\bookmarkservice\dto\BookmarkDTO$BookmarkDTOBuilder.class
+kr\co\tj\bookmarkservice\dto\BookmarkDTO.class

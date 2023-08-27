@@ -1,0 +1,13 @@
+kr\co\tj\usinsaorderservice\service\OrderService.class
+kr\co\tj\usinsaorderservice\dto\OrderRequest$OrderRequestBuilder.class
+kr\co\tj\usinsaorderservice\UsinsaOrderServiceApplication.class
+kr\co\tj\usinsaorderservice\dto\OrderDTO$OrderDTOBuilder.class
+kr\co\tj\usinsaorderservice\dto\OrderDTO.class
+kr\co\tj\usinsaorderservice\dto\OrderResponse$OrderResponseBuilder.class
+kr\co\tj\usinsaorderservice\dto\OrderEntity.class
+kr\co\tj\usinsaorderservice\dto\OrderRequest.class
+kr\co\tj\usinsaorderservice\repository\OrderRepository.class
+kr\co\tj\usinsaorderservice\dto\OrderResponse.class
+kr\co\tj\usinsaorderservice\feign\ItemFeign.class
+kr\co\tj\usinsaorderservice\dto\OrderEntity$OrderEntityBuilder.class
+kr\co\tj\usinsaorderservice\controller\OrderController.class

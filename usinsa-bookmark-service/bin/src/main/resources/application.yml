@@ -1,0 +1,35 @@
+server:
+  port: 0
+  
+  # port 번호를 지정하지 않고 사용할 수 있는 port 번호를 임의로 할당하라는 의미. 
+  # (0번 port를 사용하겠다는 것이 아니다.)
+  
+spring:
+  application:
+    name: reply-service
+    
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+        
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/usinsa_v2?serverTimezone=Asia/Seoul
+    username: tj705
+    password: tj705
+      
+      
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true # 유레가 서버에 등록
+    fetch-registry: true # 주기적으로 다른 인스턴스의 데이터를 받아와 갱신
+    service-url:
+      defaultZone: http://localhost:8761/eureka # 유레가 커서의 주소 정보 

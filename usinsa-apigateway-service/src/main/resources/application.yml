@@ -7,7 +7,7 @@ spring:
 
   cloud:
     gateway:
-     
+       
 
     
       routes:
@@ -32,6 +32,15 @@ spring:
         filters:
         - name: ManagerFilter
         
+        
+      - id: order-service
+        uri: lb://ORDER-SERVICE
+        predicates:
+        - Path=/order-service/**
+        - Method=GET
+        filters:
+        - name: AllAuthorityFilter
+        
       - id: order-service
         uri: lb://ORDER-SERVICE
         predicates:
@@ -55,8 +64,7 @@ spring:
         - Method=GET
         filters:
         - name: AllAuthorityFilter
-        
-        
+           
       - id: item-service # 순서 2번
         uri: lb://ITEM-SERVICE # 순서 3번
         predicates:

@@ -9,27 +9,12 @@ function ItemList() {
   const ROLE = localStorage.getItem("ROLE");
   const [pageList, setPageList] = useState([]);
 
-  const selectList = ["", "상의", "하의", "모자", "가방"];
-  const [Selected, setSelected] = useState("item.itemType");
-
-  const handleSelect = (e) => {
-    setSelected(e.target.value);
-  };
-
   useEffect(() => {
     fetchFn("GET", `/api/item-service/items/list?pageNum=0`).then((data) => {
       setPageList(data.result.content);
     });
   }, []);
 
-  function onSubmitHandler(e) {
-    e.preventDefault();
-    if (Selected === "item.itemType") {
-      window.location.href = `/item-service/list`;
-    } else {
-      window.location.href = `/item-service/list/itemtype/${Selected}`;
-    }
-  }
   function onClickHandler1() {
     window.location.href = "/item-service/list";
   }

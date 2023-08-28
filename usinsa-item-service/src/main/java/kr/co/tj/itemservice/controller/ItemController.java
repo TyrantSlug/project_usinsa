@@ -134,7 +134,7 @@ public class ItemController {
       }
    }
    
-   @GetMapping("/itemtype/{itemtype}")
+   @GetMapping("/itemtype/{itemType}")
    public ResponseEntity<?> listByItemType(@PathVariable("itemType") String itemType, @RequestParam("pageNum") int pageNum) {
       Map<String, Object> map = new HashMap<>();
 

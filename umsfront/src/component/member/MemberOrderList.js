@@ -13,8 +13,9 @@ function MemberOrderList() {
   useEffect(() => {
     fetchFn(
       "GET",
-      `/api/order-service/orders/list/${username}?pageNum=0`
-).then((data) => {
+      `/api/order-service/orders/${username}?pageNum=0`,
+      null
+    ).then((data) => {
       if (LOGINER == username || ROLE == 2) {
         setPageList(data.result.content);
       } else {

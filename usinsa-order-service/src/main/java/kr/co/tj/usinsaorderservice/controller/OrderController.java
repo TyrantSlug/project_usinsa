@@ -61,33 +61,8 @@ public class OrderController {
       
       return ResponseEntity.status(HttpStatus.CREATED).body(orderResponse);
    }
-   
-   @GetMapping("/orders/user/{username}")
-   public ResponseEntity<?> getOrdersByUsername(@PathVariable() String username){
-      
-      List<OrderDTO> list = orderService.getOrdersByUsername(username);
-      
-      List<OrderResponse> responseList = new ArrayList<>();
-      
-      for(OrderDTO orderDTO : list) {
-         OrderResponse orderResponse = orderDTO.toOrderResponse();
-         responseList.add(orderResponse);
-      }
-      
-      return ResponseEntity.status(HttpStatus.OK).body(responseList);
-   }
-   
-//   @GetMapping("/orders/username")
-//   public ResponseEntity<?> listByUsername(@RequestParam("username") String username, @RequestParam("pageNum") int pageNum) {
-//      Map<String, Object> map = new HashMap<>();
-//      System.out.println(map);
-//      Page<OrderDTO> page = orderService.findByUsername(username, pageNum);
-//      map.put("result", page);
-//      System.out.println(map);
-//      return ResponseEntity.ok().body(map);
-//   } 
-   
-   @GetMapping("/orders/list/{username}")
+
+   @GetMapping("/orders/{username}")
    public ResponseEntity<?> listByUsername(@PathVariable("username") String username, @RequestParam("pageNum") int pageNum) {
       Map<String, Object> map = new HashMap<>();
 

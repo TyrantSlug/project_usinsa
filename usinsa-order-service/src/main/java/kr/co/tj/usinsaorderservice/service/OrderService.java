@@ -110,6 +110,18 @@ public class OrderService {
           return pageDto;
    }
 
+public Page<OrderDTO> orderListbUsername(String username, int pageNum) {
+	
+	List<Sort.Order> sortList = new ArrayList<>();
+	sortList.add(Sort.Order.desc("id"));
+
+	Pageable pageable = PageRequest.of(pageNum, 20, Sort.by(sortList));
+	Page<OrderEntity> pageItem = orderRepository.findByUsername(username, pageable);
+	Page<OrderDTO> pageDTO = pageItem.map(orderEntity -> OrderDTO.toOrderDTO(orderEntity));
+
+	return pageDTO;
+}
+
 
 
 

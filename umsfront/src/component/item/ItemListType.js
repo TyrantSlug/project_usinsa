@@ -8,10 +8,9 @@ import { Button } from "react-bootstrap";
 function ItemTypeList() {
   const ROLE = localStorage.getItem("ROLE");
   const [pageList, setPageList] = useState([]);
-  const [itemType, setItemType] = useState("");
+  const itemType = useParams().itemType;
 
-
-
+  // ***listByItemType
   useEffect(() => {
     fetchFn("GET", `/api/item-service/itemtype/${itemType}?pageNum=0`).then(
       (data) => {
@@ -20,30 +19,28 @@ function ItemTypeList() {
     );
   }, [itemType]);
 
-  function onClickHandler(selectedItemType) {
-    setItemType(selectedItemType); // Set the selected item type to the state
-    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
-  }
-
   function onClickHandler1() {
-    setItemType(""); // Clear the itemType state to show all items
     window.location.href = "/item-service/list";
   }
 
   function onClickHandler2() {
-    onClickHandler("상의"); // Call the shared onClickHandler with the selected item type
+    const selectedItemType = "상의";
+    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
   }
 
   function onClickHandler3() {
-    onClickHandler("하의"); // Call the shared onClickHandler with the selected item type
+    const selectedItemType = "하의";
+    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
   }
 
   function onClickHandler4() {
-    onClickHandler("모자"); // Call the shared onClickHandler with the selected item type
+    const selectedItemType = "모자";
+    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
   }
 
   function onClickHandler5() {
-    onClickHandler("가방"); // Call the shared onClickHandler with the selected item type
+    const selectedItemType = "가방";
+    window.location.href = `/item-service/list/itemType/${selectedItemType}`;
   }
 
   return (

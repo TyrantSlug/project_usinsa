@@ -3,12 +3,12 @@ server:
 
 spring:
   application:
-    name: apigateway-service1
+    name: apigateway-service
 
   cloud:
     gateway:
        
-
+  
     
       routes:
        

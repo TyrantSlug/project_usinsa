@@ -65,27 +65,6 @@ public class ReplyController {
 		return "reply service입니다." + env.getProperty("local.server.port");
 	}
 
-//	@GetMapping("/all/{bid}")
-//	public ResponseEntity<?> findByBId(@PathVariable("bid") Long bid) {
-//
-//		List<ReplyResponse> responseList = new ArrayList<>();
-//
-//		try {
-//			List<ReplyDTO> list = replyService.findByBId(bid);
-//
-//			for (ReplyDTO replyDTO : list) {
-//				ReplyResponse replyResponse = replyDTO.toReplyResponse();
-//				responseList.add(replyResponse);
-//			}
-//
-//			return ResponseEntity.status(HttpStatus.OK).body(responseList);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-//		}
-//
-//	}
 
 	// 댓글 입력
 	@PostMapping("/user/replys")
@@ -131,24 +110,6 @@ public class ReplyController {
 		}
 	}
 
-//	// 특정 유저가 작성한 모든 댓글 불러오기
-//	@GetMapping("/username/{username}")
-//	public ResponseEntity<?> findByUsername(@PathVariable("username") String username) {
-//
-//		if (username == null) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 접근입니다.");
-//		}
-//
-//		try {
-//			List<ReplyDTO> list = replyService.findByUsername(username);
-//			return ResponseEntity.status(HttpStatus.OK).body(list);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-//		}
-//
-//	}
 
 	// 댓글 수정하기
 	@PutMapping("/user")

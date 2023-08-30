@@ -6,6 +6,7 @@ import ReplyList from "../reply/ReplyList";
 import { Button, Modal } from "react-bootstrap";
 import OrderInsert from "../order/OrderInsert";
 import moment from "moment";
+import Card from "react-bootstrap/Card";
 
 function ItemDetail() {
   const LOGINER = localStorage.getItem("LOGINER");
@@ -358,98 +359,96 @@ function ItemDetail() {
               <img src="/img/a.jpg" width={500} height={500} />
             )}
           </div>
-          <div
-            style={{
-              flex: 1,
-              borderLeft: "2px solid #ccc",
-              paddingLeft: "20px",
-              paddingRight: "300px",
-            }}
-          >
+
+          <div style={{ flex: 1 }}>
             {item !== null && (
               <>
-                {item.member && <p>등록자: {item.member.username}</p>}
-                등록자:{" "}
-                <Link
-                  className="b"
-                  to={`/item-service/list/username/${item.username}`}
-                  onSubmit={onsubmitHandler}
-                >
-                  {item.username}
-                </Link>
-                <br />
-                <p style={{ textAlign: "left" }}>상품번호: {item.id}</p>
-                <br />
-                <p style={{ textAlign: "right" }}>상품이름: {item.itemName}</p>
-                <br />
-                가격: {item.price}
-                <br />
-                할인률: {item.discount}
-                <br />
-                할인가격 : {getDiscountedPrice()}
-                <br />
-                재고: {item.ea}
-                <br />
-                상품정보: {item.itemDescribe}
-                <br />
-                종류: {item.itemType}
-                <br />
-                등록날짜: {moment(item.createDate).format("YYYY-MM-DD")}
-                <br />
-                조회수: {item.viewCount}
-                <br />
-                {LOGINER === item.username ? (
-                  <>
-                    <Button variant="dark" onClick={handleImageUploadClick}>
-                      이미지 등록
-                    </Button>
-                    &nbsp;
-                    <Button variant="dark">
-                      <Link className="a" to={`/item-service/update/${id}`}>
-                        수정
+                <Card style={{ width: "300px" }}>
+                  <Card.Body>
+                    {item.member && (
+                      <Card.Text>등록자: {item.member.username}</Card.Text>
+                    )}
+                    <Card.Text>
+                      등록자:{" "}
+                      <Link
+                        className="b"
+                        to={`/item-service/list/username/${item.username}`}
+                        onSubmit={onsubmitHandler}
+                      >
+                        {item.username}
                       </Link>
-                    </Button>
-                    &nbsp;
-                    <Button variant="dark">
-                      <Link className="a" onClick={deleteHere}>
-                        삭제
-                      </Link>
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    {LOGINER === "null" ? (
+                    </Card.Text>
+                    <Card.Text>상품번호: {item.id}</Card.Text>
+                    <Card.Text>상품이름: {item.itemName}</Card.Text>
+                    <Card.Text>가격: {item.price}</Card.Text>
+                    <Card.Text>할인률: {item.discount}</Card.Text>
+                    <Card.Text>할인가격 : {getDiscountedPrice()}</Card.Text>
+                    <Card.Text>재고: {item.ea}</Card.Text>
+                    <Card.Text>상품정보: {item.itemDescribe}</Card.Text>
+                    <Card.Text>종류: {item.itemType}</Card.Text>
+                    <Card.Text>
+                      등록날짜: {moment(item.createDate).format("YYYY-MM-DD")}
+                    </Card.Text>
+                    <Card.Text>조회수: {item.viewCount}</Card.Text>
+
+                    {LOGINER === item.username ? (
                       <>
-                        <Button variant="dark" onClick={aaaaa}>
-                          구매
+                        <Button variant="dark" onClick={handleImageUploadClick}>
+                          이미지 등록
+                        </Button>
+                        &nbsp;
+                        <Button variant="dark">
+                          <Link className="a" to={`/item-service/update/${id}`}>
+                            수정
+                          </Link>
+                        </Button>
+                        &nbsp;
+                        <Button variant="dark">
+                          <Link className="a" onClick={deleteHere}>
+                            삭제
+                          </Link>
                         </Button>
                       </>
                     ) : (
                       <>
-                        <Button variant="dark" onClick={toggleModal}>
-                          구매
-                        </Button>
-                        <button onClick={handleLikeToggle}>
-                          {isLiked ? <span>❤️</span> : <span>🤍</span>}
-                        </button>
+                        {LOGINER === "null" ? (
+                          <>
+                            <Button variant="dark" onClick={aaaaa}>
+                              구매
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button variant="dark" onClick={toggleModal}>
+                              구매
+                            </Button>
+                            <button onClick={handleLikeToggle}>
+                              {isLiked ? <span>❤️</span> : <span>🤍</span>}
+                            </button>
+                          </>
+                        )}
                       </>
                     )}
-                  </>
-                )}
-                <form action="#" encType="multipart/form-data" display="inline">
-                  <input
-                    type="file"
-                    name="file"
-                    ref={fileInputRef}
-                    style={{ display: "none" }}
-                    onChange={handleFileChange}
-                  />
-                  <input
-                    type="submit"
-                    disabled={file !== null}
-                    style={{ display: "none" }}
-                  />
-                </form>
+                    <form
+                      action="#"
+                      encType="multipart/form-data"
+                      display="inline"
+                    >
+                      <input
+                        type="file"
+                        name="file"
+                        ref={fileInputRef}
+                        style={{ display: "none" }}
+                        onChange={handleFileChange}
+                      />
+                      <input
+                        type="submit"
+                        disabled={file !== null}
+                        style={{ display: "none" }}
+                      />
+                    </form>
+                  </Card.Body>
+                </Card>
               </>
             )}
           </div>

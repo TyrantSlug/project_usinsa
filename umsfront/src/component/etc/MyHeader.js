@@ -44,7 +44,7 @@ function MyHeader() {
                 <strong>회원 목록</strong>
               </Nav.Link>
             )}
-            {LOGINER === "null" ? (
+            {LOGINER === "null" || LOGINER === null ? (
               <>
                 <Nav.Link href="/member-service/login">
                   <strong>로그인</strong>

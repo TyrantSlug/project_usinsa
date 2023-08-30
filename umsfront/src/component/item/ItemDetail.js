@@ -366,7 +366,17 @@ function ItemDetail() {
                 <Card style={{ width: "300px" }}>
                   <Card.Body>
                     {item.member && (
-                      <Card.Text>등록자: {item.member.username}</Card.Text>
+                      <Card.Text>
+                        {item.member && <p>등록자: {item.member.username}</p>}
+                        등록자:{" "}
+                        <Link
+                          className="b"
+                          to={`/item-service/list/username/${item.username}`}
+                          onSubmit={onsubmitHandler}
+                        >
+                          {item.username}
+                        </Link>
+                      </Card.Text>
                     )}
                     <Card.Text>
                       등록자:{" "}

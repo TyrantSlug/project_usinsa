@@ -78,3 +78,7 @@
 ## 🔍  ERD
 
 ![erd](https://github.com/tj7051/usinsa-project-web/blob/main/img/ERD.png)
+
+## 동영상
+
+![동영상](https://youtu.be/v-zRrH5wUZY).

@@ -81,4 +81,4 @@
 
 ## 동영상
 
-[![동영상](https://user-images.githubusercontent.com/132973592/284797276-28630120-3e0e-47f6-b838-ca38d51539cd.jpg)](https://youtu.be/v-zRrH5wUZY).
+[![동영상](https://user-images.githubusercontent.com/132973592/284797276-28630120-3e0e-47f6-b838-ca38d51539cd.jpg)](https://youtu.be/v-zRrH5wUZY)
